@@ -1,4 +1,4 @@
-package eda;
+package edaDoubleLinkedList;
 
 public class Node {
     private int content;

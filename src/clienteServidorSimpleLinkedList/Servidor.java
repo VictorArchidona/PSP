@@ -1,7 +1,5 @@
-package clienteServidor;
+package clienteServidorSimpleLinkedList;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class Servidor extends Conexion { //Se hereda de conexión para hacer uso de los sockets y demás

@@ -1,4 +1,4 @@
-package eda;
+package edaDoubleLinkedList;
 
 /**
  * Esta clase contiene las metodos para la creacion de una

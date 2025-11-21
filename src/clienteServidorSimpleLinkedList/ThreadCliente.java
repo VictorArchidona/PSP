@@ -1,4 +1,4 @@
-package clienteServidor;
+package clienteServidorSimpleLinkedList;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

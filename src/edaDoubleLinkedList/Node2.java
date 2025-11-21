@@ -1,5 +1,5 @@
 
-package eda;
+package edaDoubleLinkedList;
 
 /**
  * Esta clase representa un nodo para una lista enlazada doble.

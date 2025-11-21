@@ -1,6 +1,4 @@
-package eda;
-
-import java.util.ArrayList;
+package edaDoubleLinkedList;
 
 public class Main2 {
     public static void main(String[] args) {

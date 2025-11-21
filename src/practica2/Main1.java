@@ -17,8 +17,8 @@ public class Main1 {
     /**
      * Pre: ---
      * Post: Ejecuta el cálculo del módulo del vector resultante
-     *       del producto matriz-vector usando 16 threads con
-     *       sincronización por esperas activas.
+     * del producto matriz-vector usando 16 threads con
+     * sincronización por esperas activas.
      */
     public static void main(String[] args) {
         System.out.println("Iniciando cálculo del producto matriz-vector con " + NUM_THREADS + " threads");
