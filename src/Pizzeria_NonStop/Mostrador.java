@@ -1,6 +1,7 @@
 package Pizzeria_NonStop;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -64,9 +65,15 @@ public class Mostrador {
 
     /**
      * Elimina la pizza de la lista de pizzas
-     * @param pizza
+     *
      */
-    public void eliminarPizza(Pizza pizza) throws InterruptedException {
+    public Pizza eliminarPizza() throws InterruptedException {
+
+        //Creamos el objeto Random para sacar valores aleatorios
+        Random random = new Random();
+
+        //Se inicializa el objeto pizza para mas tarde almacenar su valor y utilizarlo
+        Pizza pizza;
 
         System.out.println("Eliminando una pizza...");
 
@@ -76,8 +83,12 @@ public class Mostrador {
         //Pide permiso para entrar a la lista (Zona Critica)
         mutex.acquire();
 
-        //Elimina la pizza de la lista
-        pizzas.remove(pizza);
+            //--Logica aleatoria--
+            //Genero un numero aleatorio entre 0 y el numero del tamaño de la lista -1
+            int numeroPizzaAleatoria = random.nextInt(pizzas.size());
+
+            //Recoge la pizza eliminada y la saca de la lista
+            pizza = pizzas.remove(numeroPizzaAleatoria);
 
         //devuelve el permiso de modificar la lista
         mutex.release();
@@ -85,6 +96,7 @@ public class Mostrador {
         //Dice que hay un hueco para una pizza nueva
         semHuecos.release();
 
+        return pizza;
     }
 
     /**
@@ -101,81 +113,4 @@ public class Mostrador {
 
 }
 
-/**
- *
- *
- *🍕 EJERCICIO: La Pizzería Concurrente "Non-Stop"
- * 📝 Descripción
- * Se debe simular el funcionamiento de una pizzería de alta demanda utilizando Programación Concurrente en Java.
- * La pizzería tiene un espacio físico limitado en el mostrador para dejar las pizzas preparadas.
- *
- * El sistema debe coordinar a múltiples empleados (hilos) que trabajan simultáneamente sin que ocurran errores de datos
- * (condiciones de carrera) ni bloqueos infinitos (deadlocks).
- *
- * ⚙️ Requisitos Técnicos
- * Modelo de Datos:
- *
- * Debe existir una clase Pizza que tenga un id y un Tipo (usando un Enum: Margarita, Pepperoni, etc.).
- *
- * Recurso Compartido (Mostrador):
- *
- * Actúa como un buffer o almacén intermedio.
- *
- * Utiliza una estructura de datos (ej. ArrayList) para guardar las pizzas.
- *
- * Capacidad Limitada: Solo caben 5 pizzas (configurable).
- *
- * Sincronización: Debe usar Semáforos para controlar:
- *
- * Que no se intente añadir si está lleno.
- *
- * Que no se intente retirar si está vacío.
- *
- * Que dos hilos no toquen la lista al mismo tiempo (Exclusión Mutua / Mutex).
- *
- * Productores (Cocinero):
- *
- * Hilos que crean pizzas indefinidamente.
- *
- * Tardan un tiempo aleatorio en cocinar.
- *
- * Si el mostrador está lleno, deben esperar pacientemente.
- *
- * Consumidores (Repartidor):
- *
- * Hilos que recogen pizzas indefinidamente.
- *
- * Tardan un tiempo aleatorio en repartir.
- *
- * Si no hay pizzas, deben esperar a que salga una del horno.
- *
- * Ejecución (Main):
- *
- * Debe iniciar el mostrador, lanzar varios cocineros y varios repartidores al mismo tiempo.
- *
- *
- *
- *🗺️ TU MAPA DE PROGRESO
- * Aquí es donde te encuentras ahora mismo. ¡Ya has pasado el ecuador del ejercicio!
- *
- * ✅ 1. Clase TipoPizza (Enum): Definida.
- *
- * ✅ 2. Clase Pizza: Definida con sus atributos.
- *
- * ✅ 3. Clase Cocinero (Runnable): Lógica creada (bucle, generar pizza, llamar al mostrador).
- *
- * 🚧 4. Clase Mostrador: <-- ESTÁS AQUÍ
- *
- * ✅ Atributos y Semáforos definidos.
- *
- * ✅ Método depositarPizza() (Productores) TERMINADO.
- *
- * ❌ Método retirarPizza() (Consumidores) PENDIENTE.
- *
- * ✅ 5. Clase Repartidor (Runnable): Aún no creada (será el espejo del Cocinero).
- *
- * ❌ 6. Clase Main: Aún no creada (donde arranca todo).
- *
- *
- *
- */
+

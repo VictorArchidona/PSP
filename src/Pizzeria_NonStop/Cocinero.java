@@ -32,14 +32,16 @@ public class Cocinero implements Runnable{
     @Override
     public void run() {
 
+        //Este objeto se crea para poder elegir tipo de pizzas al azar
+        Random random = new Random();
+
         while(true) {
 
             try {
                 //Simula el tiempo de cocinado de pizzas
                 Thread.sleep(3000);
 
-                //Este objeto se crea para poder elegir tipo de pizzas al azar
-                Random random = new Random();
+
 
                 //Obtiene todos los valores del Enum
                 Pizza.tipoPizza[] tiposPizza = Pizza.tipoPizza.values();
@@ -51,6 +53,8 @@ public class Cocinero implements Runnable{
                 Pizza pizzaNueva = new Pizza(0, tipoAleatorio);
 
                 System.out.println("El Cocinero " + idCocinero + " ha creado una pizza");
+
+                mostrador.añadirPizza(pizzaNueva);
 
             } catch (InterruptedException e) {
 
