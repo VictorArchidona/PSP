@@ -42,7 +42,7 @@ public class Mostrador {
      */
     public void añadirPizza(Pizza pizza) throws InterruptedException {
 
-        System.out.println("Mostrando Pizzas");
+        System.out.println("Añadiendo una pizza...");
 
         //Hay sitios en el mostrador (Si no hay el hilo se bloquea)
         semHuecos.acquire();
@@ -57,7 +57,7 @@ public class Mostrador {
         //Devuelve el permiso de modificar
         mutex.release();
 
-        //Increenta semPizzas para avisar de que hay una pizza nueva
+        //Incrementa semPizzas para avisar de que hay una pizza nueva
         semPizzas.release();
 
     }
@@ -66,8 +66,24 @@ public class Mostrador {
      * Elimina la pizza de la lista de pizzas
      * @param pizza
      */
-    public void eliminarPizza(Pizza pizza){
+    public void eliminarPizza(Pizza pizza) throws InterruptedException {
 
+        System.out.println("Eliminando una pizza...");
+
+        //Si se coge una pizza, se libera un hueco
+        semPizzas.acquire();
+
+        //Pide permiso para entrar a la lista (Zona Critica)
+        mutex.acquire();
+
+        //Elimina la pizza de la lista
+        pizzas.remove(pizza);
+
+        //devuelve el permiso de modificar la lista
+        mutex.release();
+
+        //Dice que hay un hueco para una pizza nueva
+        semHuecos.release();
 
     }
 
@@ -90,9 +106,11 @@ public class Mostrador {
  *
  *🍕 EJERCICIO: La Pizzería Concurrente "Non-Stop"
  * 📝 Descripción
- * Se debe simular el funcionamiento de una pizzería de alta demanda utilizando Programación Concurrente en Java. La pizzería tiene un espacio físico limitado en el mostrador para dejar las pizzas preparadas.
+ * Se debe simular el funcionamiento de una pizzería de alta demanda utilizando Programación Concurrente en Java.
+ * La pizzería tiene un espacio físico limitado en el mostrador para dejar las pizzas preparadas.
  *
- * El sistema debe coordinar a múltiples empleados (hilos) que trabajan simultáneamente sin que ocurran errores de datos (condiciones de carrera) ni bloqueos infinitos (deadlocks).
+ * El sistema debe coordinar a múltiples empleados (hilos) que trabajan simultáneamente sin que ocurran errores de datos
+ * (condiciones de carrera) ni bloqueos infinitos (deadlocks).
  *
  * ⚙️ Requisitos Técnicos
  * Modelo de Datos:
@@ -154,7 +172,7 @@ public class Mostrador {
  *
  * ❌ Método retirarPizza() (Consumidores) PENDIENTE.
  *
- * ❌ 5. Clase Repartidor (Runnable): Aún no creada (será el espejo del Cocinero).
+ * ✅ 5. Clase Repartidor (Runnable): Aún no creada (será el espejo del Cocinero).
  *
  * ❌ 6. Clase Main: Aún no creada (donde arranca todo).
  *
