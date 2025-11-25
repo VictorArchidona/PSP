@@ -1,20 +1,15 @@
-package edaDoubleLinkedList;
+package Examen;
 
 /**
- * Clase que representa un nodo para una lista enlazada simple.
- *
- * Cada nodo contiene un valor entero y una referencia al siguiente nodo
- * en la lista.
- *
- * @author Sistema EDA
- * @version 1.0
- * @see SimpleLinkedList
+ * Esta clase representa los nodos de una pila enlazada simple
+ * @author Victor
  */
 public class Node {
-    /** Contenido del nodo */
-    private int content;
 
-    /** Referencia al siguiente nodo en la lista */
+    //Contenido del nodo
+    private Carta carta;
+
+    //Referencia al siguiente nodo en la lista
     private Node next;
 
     /**
@@ -25,10 +20,10 @@ public class Node {
     /**
      * Constructor que crea un nodo con el contenido especificado.
      *
-     * @param content Valor entero a almacenar en el nodo
+     * @param carta Valor entero a almacenar en el nodo
      */
-    public Node(int content) {
-        this.content = content;
+    public Node(Carta carta) {
+        this.carta = carta;
         this.next = null;
     }
 
@@ -37,17 +32,17 @@ public class Node {
      *
      * @return Valor entero del contenido del nodo
      */
-    public int getContent() {
-        return content;
+    public  Carta getCarta() {
+        return carta;
     }
 
     /**
      * Establece el contenido del nodo.
      *
-     * @param content Nuevo valor entero a almacenar
+     * @param carta Nuevo valor entero a almacenar
      */
-    public void setContent(int content) {
-        this.content = content;
+    public void setCarta(Carta carta) {
+        this.carta = carta;
     }
 
     /**
@@ -75,6 +70,7 @@ public class Node {
      */
     @Override
     public String toString() {
-        return "Content = " + this.content;
+
+        return "Content = " + this.carta;
     }
 }
